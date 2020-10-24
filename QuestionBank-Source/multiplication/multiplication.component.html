@@ -1,0 +1,90 @@
+<div class="container">
+   <div class="main-container">
+      <div class="navigation">
+         <ul style="list-style-type:none">
+            <li><a class="navLink" href="#">Multiplication</a></li>
+            <li><a class="navLink" href="#">Addition</a></li>
+            <li><a class="navLink" href="#">Subtraction</a></li>
+         </ul>
+      </div>
+      <div class="operations-controls">
+         <div class="operations">
+            <div class="inputGroup">
+               <label for="noOfQuestion">No Of Questions </label>
+               <input type="number" [(ngModel)]="noOfQuestion">
+            </div>
+
+            <div class="inputGroup">
+               <label for="upperDigit"> Upper Digit Number</label>
+               <input type="number" [(ngModel)]="upperDigit">
+            </div>
+            <div class="inputGroup">
+               <label for="lowerDigitNo">Lower Digit Number</label>
+               <input type="number" (ngModelChange)="lowerDigitChanged()" [(ngModel)]="lowerDigit">
+            </div>
+            <div class="button">
+               <button (click)="generateQuestions()">Generate Questions </button>
+            </div>
+            <div class="button">
+               <button (click)="convertCanvas()">Generate PDF</button>
+            </div>
+
+         </div>
+
+
+
+         <div class="question">
+
+            <ng-container *ngFor="let eachPage of questionsByPage">
+               <div id="questionsPlayground">
+                  <ng-container *ngFor="let eachQuestion of eachPage">
+                     <div class="eachQuestion">
+                        <table>
+                           <tbody>
+                              <tr>
+                                 <ng-container *ngFor="let eachNumber of eachQuestion.firstNumberAsArray">
+                                    <td>{{eachNumber}}</td>
+                                 </ng-container>
+                              </tr>
+
+                              <tr>
+                                 <ng-container *ngFor="let eachNumber of  eachQuestion.secondNumberAsArray">
+                                    <td>{{eachNumber}}</td>
+                                 </ng-container>
+                              </tr>
+                              <tr>
+                                 <td [attr.colspan]="eachQuestion.firstNumberAsArray.length" class="lineTd">
+                                 </td>
+                              </tr>
+
+                              <ng-container *ngFor="let x of eachQuestion.secondNumberAsOriginalArray">
+                                 <tr>
+                                    <ng-container *ngFor="let eachResult  of eachQuestion.firstNumberAsArray">
+                                       <td class="spaceForAnswer"></td>
+                                    </ng-container>
+                                 </tr>
+                              </ng-container>
+                              <tr>
+                                 <td [attr.colspan]="eachQuestion.firstNumberAsArray.length" class="lineTd">
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <ng-container *ngFor="let eachResult  of eachQuestion.firstNumberAsArray">
+                                    <td class="finalResult"></td>
+                                 </ng-container>
+                              </tr>
+                           </tbody>
+                        </table>
+
+                     </div>
+
+                  </ng-container>
+               </div>
+
+            </ng-container>
+
+
+         </div>
+      </div>
+   </div>
+</div>
